@@ -28,6 +28,21 @@ mkdir -p ${projectResultsDir}/alignment
 mkdir -p ${projectResultsDir}/expression
 mkdir -p ${projectResultsDir}/qc
 
+usedWorkflow=$(basename ${workflow})
+
+if [ "${usedWorkflow}" == "workflow_RSEM.csv" ]
+then
+
+	mkdir -p ${projectResultsDir}/expression/RSEM/
+
+	cp ${intermediateDir}/*.merged.bam ${projectResultsDir}/alignment
+	cp -r ${intermediateDir}/*.rsem.* ${projectResultsDir}/expression/RSEM/
+	cp ${intermediateDir}/*final.log ${projectResultsDir}/qc
+	cp ${intermediateDir}/*.txt ${projectResultsDir}/qc
+
+else
+
+
 # Copy project csv file to project results directory
 
 cp ${projectJobsDir}/${project}.csv ${projectResultsDir}
@@ -51,6 +66,7 @@ cp ${projectJobsDir}/${project}.csv ${projectResultsDir}
 	cp ${intermediateDir}/*.final.log ${projectResultsDir}/qc
 	cp ${intermediateDir}/*.final.log ${projectResultsDir}/alignment
 
+fi
 
 # write README.txt file
 

@@ -1,0 +1,9 @@
+step,protocol,dependencies
+s00_FastqToSam,protocols/FastqToSam.sh,
+s01_TagUmappedBam,protocols/TagUmappedBam.sh,s00_FastqToSam
+s02_BamToFastq,protocols/BamToFastq.sh,s01_TagUmappedBam
+s03_STAR,protocols/STAR.sh,s02_BamToFastq
+s04_MergeBam,protocols/MergeBam.sh,s03_STAR
+s05_MergeLanes,protocols/MergeLanes.sh,s04_MergeBam
+s06_RSEM,protocols/RSEM.sh,s05_MergeLanes
+s07_CopyToResultsDir,protocols/CopyToResultsDir.sh,s06_RSEM
